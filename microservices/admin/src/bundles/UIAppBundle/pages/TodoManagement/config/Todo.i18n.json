@@ -1,0 +1,34 @@
+{
+  "en": {
+    "management": {
+      "todo": {
+        "fields": {
+          "_id": "ID",
+          "titel": "Titel",
+          "done": "Done",
+          "UserId": "User Id",
+          "User": "User"
+        },
+        "menu": {
+          "title": "Todo"
+        },
+        "list": {
+          "header": "Todo List",
+          "create_btn": "New Todo"
+        },
+        "create": {
+          "header": "Create Todo"
+        },
+        "edit": {
+          "header": "Edit Todo"
+        },
+        "view": {
+          "header": "View Todo"
+        },
+        "delete_confirmation": "You have deleted the Todo",
+        "create_confirmation": "You successfully added a new Todo",
+        "edit_confirmation": "You successfully edited the Todo"
+      }
+    }
+  }
+}
