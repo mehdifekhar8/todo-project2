@@ -2,7 +2,7 @@ export default {
   users: [
     {
       _id: { $objectId: "61a3d0116e20682724ab01d2" },
-      roles: ["END_CUSTOMER", "SALES", "MANAGER", "ADMIN"],
+      roles: [   "ADMIN"],
       updatedAt: { $date: 1638086616516 },
       createdAt: { $date: 1638122332753 },
       isDeleted: false,
@@ -14,7 +14,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d3" },
-      roles: ["MANAGER", "SALES", "ADMIN", "END_CUSTOMER"],
+      roles: [  "ADMIN", "USER"],
       updatedAt: { $date: 1638057812663 },
       createdAt: { $date: 1638043789528 },
       isDeleted: false,
@@ -26,7 +26,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d4" },
-      roles: ["END_CUSTOMER", "ADMIN", "MANAGER"],
+      roles: [ "ADMIN", ],
       updatedAt: { $date: 1638087534556 },
       createdAt: { $date: 1638074808260 },
       isDeleted: false,
@@ -38,7 +38,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d5" },
-      roles: ["ADMIN", "END_CUSTOMER"],
+      roles: ["ADMIN", "USER"],
       updatedAt: { $date: 1638104564747 },
       createdAt: { $date: 1638110965562 },
       isDeleted: false,
@@ -50,7 +50,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d6" },
-      roles: ["MANAGER"],
+      roles: [],
       updatedAt: { $date: 1638044070950 },
       createdAt: { $date: 1638060104398 },
       isDeleted: false,
@@ -62,7 +62,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d7" },
-      roles: ["END_CUSTOMER", "MANAGER", "SALES", "ADMIN"],
+      roles: [   "ADMIN"],
       updatedAt: { $date: 1638043046856 },
       createdAt: { $date: 1638066988798 },
       isDeleted: false,
@@ -74,7 +74,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d8" },
-      roles: ["END_CUSTOMER", "SALES", "ADMIN"],
+      roles: [  "ADMIN"],
       updatedAt: { $date: 1638124989432 },
       createdAt: { $date: 1638118755611 },
       isDeleted: false,
@@ -86,7 +86,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01d9" },
-      roles: ["END_CUSTOMER", "ADMIN"],
+      roles: [ "ADMIN"],
       updatedAt: { $date: 1638095459269 },
       createdAt: { $date: 1638075711490 },
       isDeleted: false,
@@ -98,7 +98,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01da" },
-      roles: ["MANAGER", "SALES"],
+      roles: [ ],
       updatedAt: { $date: 1638060253429 },
       createdAt: { $date: 1638083751745 },
       isDeleted: false,
@@ -110,7 +110,7 @@ export default {
     },
     {
       _id: { $objectId: "61a3d0116e20682724ab01db" },
-      roles: ["ADMIN", "SALES", "END_CUSTOMER", "MANAGER"],
+      roles: ["ADMIN",   ],
       updatedAt: { $date: 1638085869340 },
       createdAt: { $date: 1638062229590 },
       isDeleted: false,

@@ -34,14 +34,8 @@ export class UserCreateForm extends XForm {
               <Ant.Select.Option value="ADMIN" key="ADMIN">
                 Admin
               </Ant.Select.Option>
-              <Ant.Select.Option value="SALES" key="SALES">
-                Sales
-              </Ant.Select.Option>
-              <Ant.Select.Option value="MANAGER" key="MANAGER">
-                Manager
-              </Ant.Select.Option>
-              <Ant.Select.Option value="END_CUSTOMER" key="END_CUSTOMER">
-                End Customer
+              <Ant.Select.Option value="USER" key="USER">
+              USER
               </Ant.Select.Option>
             </Ant.Select>
           </Ant.Form.Item>

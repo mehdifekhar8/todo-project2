@@ -101,6 +101,7 @@ export type Mutation = {
   AppFileUploadToGroup?: Maybe<AppFile>;
   AppFileUpload?: Maybe<AppFile>;
   UsersInsertOne?: Maybe<User>;
+  UserRegistration: Scalars['Boolean'];
   UsersUpdateOne: User;
   UsersDeleteOne?: Maybe<Scalars['Boolean']>;
   register: RegistrationResponse;
@@ -164,6 +165,11 @@ export type MutationAppFileUploadArgs = {
 
 export type MutationUsersInsertOneArgs = {
   document: UserInsertInput;
+};
+
+
+export type MutationUserRegistrationArgs = {
+  document: UserRegistrationInput;
 };
 
 
@@ -400,7 +406,7 @@ export type User = {
   createdBy?: Maybe<User>;
   /** Represents the user's id who has created this object */
   createdById?: Maybe<Scalars['ObjectId']>;
-  email: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
   fullName: Scalars['String'];
   isEnabled: Scalars['Boolean'];
   profile: UserProfile;
@@ -430,11 +436,15 @@ export type UserProfileInput = {
   lastName: Scalars['String'];
 };
 
+export type UserRegistrationInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  profile: UserProfileInput;
+};
+
 export enum UserRole {
   ADMIN = 'ADMIN',
-  SALES = 'SALES',
-  MANAGER = 'MANAGER',
-  END_CUSTOMER = 'END_CUSTOMER'
+  USER = 'USER'
 }
 
 export type UserUpdateInput = {

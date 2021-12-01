@@ -23,7 +23,7 @@ export class TodoAntTableSmart extends AntTableSmart<Todo> {
   }
 
   getColumns(): ColumnsType<Todo> {
-    let list = this.container.get(TodoList);
+    const list = this.container.get(TodoList);
     list.build();
     return [...list.rest(), this.getActionsColumn()];
   }

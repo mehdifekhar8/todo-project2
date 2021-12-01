@@ -1,6 +1,7 @@
-import { useGuardian, useRouter, useTranslate } from "@bluelibs/x-ui";
+import { ApolloClient, use, useGuardian, useRouter, useTranslate } from "@bluelibs/x-ui";
 import React, { useState } from "react";
 import { Routes } from "@bundles/UIAppBundle";
+import { UserRegistrationInput } from "../../../../../api.types"
 import {
   Layout,
   Form,
@@ -15,38 +16,52 @@ import {
   notification,
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { UsersCollection } from "@bundles/UIAppBundle/collections";
+import { gql, useMutation } from '@apollo/client';
 
-type FormInput = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-};
 
 export function Register() {
-  const guardian = useGuardian();
   const router = useRouter();
   const tl = useTranslate("authentication.register");
   const [submitError, setSubmitError] = useState(null);
+  const UserRegistration = gql`
+  mutation Mutation($document: UserRegistrationInput!) {
+   UserRegistration(document: $document)
+  }
+`;
+  type UserRegistration = {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }
+  const [register, { data }] = useMutation(UserRegistration);
+  const onSubmit = (newUser: UserRegistration) => {
+    const { email,
+      password,
+      firstName,
+      lastName,
+    } = newUser;
+    register({
+      variables: {
+        document: {
+          email,
+          password,
+          profile: {
+            firstName,
+            lastName,
+          }
+        }
+      }
+    }).then((status) => {
+      notification.success({
+        message: tl("success.header"),
+        description: tl("success.description"),
+      });
 
-  const onSubmit = (data: FormInput) => {
-    const { email, password, firstName, lastName } = data;
-    guardian
-      .register({
-        email,
-        firstName,
-        lastName,
-        password,
-      })
-      .then((token) => {
-        notification.success({
-          message: tl("success.header"),
-          description: tl("success.description"),
-        });
-
-        setSubmitError(null);
-        router.go(Routes.HOME);
-      })
+      setSubmitError(null);
+      router.go(Routes.LOGIN);
+    })
       .catch((err) => {
         setSubmitError(err.toString());
       });

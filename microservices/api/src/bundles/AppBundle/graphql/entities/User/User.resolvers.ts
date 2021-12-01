@@ -4,9 +4,7 @@ export default {
     UserProfile: {},
     UserRole: {
       ADMIN: "ADMIN",
-      SALES: "SALES",
-      MANAGER: "MANAGER",
-      END_CUSTOMER: "END_CUSTOMER",
+      USER: "USER",
     },
   },
 };

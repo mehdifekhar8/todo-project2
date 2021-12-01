@@ -8,10 +8,11 @@ export default /* GraphQL */ `
 
   type Mutation {
     UsersInsertOne(document: UserInsertInput!): User
+    UserRegistration(document: UserRegistrationInput!): Boolean !
     UsersUpdateOne(_id: ObjectId!, document: UserUpdateInput!): User!
     UsersDeleteOne(_id: ObjectId!): Boolean
   }
-
+  
   type Subscription {
     UsersSubscription(body: EJSON): SubscriptionEvent
     UsersSubscriptionCount(filters: EJSON): SubscriptionCountEvent

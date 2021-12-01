@@ -16,7 +16,7 @@ export default /* GraphQL */ `
     Represents the user's id who has created this object
     """
     createdById: ObjectId
-    email: String!
+    email: String
     fullName: String!
     isEnabled: Boolean!
     profile: UserProfile!
@@ -45,8 +45,7 @@ export default /* GraphQL */ `
 
   enum UserRole {
     ADMIN
-    SALES
-    MANAGER
-    END_CUSTOMER
+    USER
+ 
   }
 `;

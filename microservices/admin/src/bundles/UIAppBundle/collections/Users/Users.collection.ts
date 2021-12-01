@@ -3,7 +3,7 @@ import {
   CollectionLinkConfig,
   CollectionTransformMap,
 } from "@bluelibs/x-ui";
-import { User } from "@root/api.types";
+import { User,Mutation } from "@root/api.types";
 import {} from "@bundles/UIAppBundle/collections";
 import { ObjectId } from "@bluelibs/ejson";
 
