@@ -4,7 +4,7 @@ import {
 import React, { useEffect, useState } from "react";
 import * as Ant from "antd";
 import { Todo, TodoCollection } from "@bundles/UIAppBundle/collections";
-import { PlusOutlined, FilterOutlined } from "@ant-design/icons";
+import { PlusOutlined, FilterOutlined, SettingOutlined, EditOutlined, EllipsisOutlined, DeleteOutlined, FolderViewOutlined } from "@ant-design/icons";
 import { features } from "../../config/features";
 import { Routes } from "@bundles/UIAppBundle";
 
@@ -79,9 +79,44 @@ export function DragDropTodoList() {
                 bordered
                 dataSource={todos ? todos.filter(checkTodoNotDone) : null}
                 renderItem={todo => (
-                  <Ant.List.Item  >
+                  <Ant.List.Item   >
                     <Ant.Typography.Text mark></Ant.Typography.Text>
-                    <Ant.Card style={{ borderTopColor: "#124BD1" }} size="small" key={todo.titel} onDragStart={(e) => e.dataTransfer.setData("id", todo.titel)} draggable bordered={true}>
+                    <Ant.Card actions={[
+                      <FolderViewOutlined
+                        style={{ color: "#124BD1" }}
+                        key="view"
+                        onClick={() => router.go(Routes.TODO_VIEW, {
+                          params: { id: todo._id.toString() },
+                        })} />,
+                      <EditOutlined style={{ color: "#53A753" }}
+                        key="edit"
+                        onClick={() => router.go(Routes.TODO_EDIT, {
+                          params: { id: todo._id.toString() },
+                        })} />,
+                      <Ant.Popconfirm
+                        key="delete"
+                        title="Are you sure you want to delete this Todo?"
+                        onConfirm={() => {
+                          todosCollection.deleteOne(todo._id).then(() => {
+                            router.go(Routes.TODO_LIST_Drag_Drop);
+                            Ant.notification.success({
+                              message: "Success",
+                              description: "You have deleted the Todo",
+                            });
+                          });
+                        }}
+                      >
+                        <DeleteOutlined style={{ color: "#eb2f96" }} />
+                      </Ant.Popconfirm>
+                    ]} style={{
+                      borderTopColor: "#124BD1",
+                      width: "100%"
+                    }}
+                      size="small"
+                      key={todo.titel}
+                      onDragStart={(e) => e.dataTransfer.setData("id", todo.titel)}
+                      draggable
+                      bordered={true}>
                       {todo.titel}
                     </Ant.Card>
                   </Ant.List.Item>
@@ -101,7 +136,38 @@ export function DragDropTodoList() {
                 renderItem={todo => (
                   <Ant.List.Item>
                     <Ant.Typography.Text mark></Ant.Typography.Text>
-                    <Ant.Card style={{ borderTopColor: "#53A753" }} size="small" key={todo.titel} onDragStart={(e) => e.dataTransfer.setData("id", todo.titel)} draggable bordered={true}>
+                    <Ant.Card actions={[
+                      <FolderViewOutlined style={{ color: "#124BD1" }}
+                        key="view"
+                        onClick={() => router.go(Routes.TODO_VIEW, {
+                          params: { id: todo._id.toString() },
+                        })} />,
+                      <EditOutlined style={{ color: "#53A753" }}
+                        key="edit"
+                        onClick={() => router.go(Routes.TODO_EDIT, {
+                          params: { id: todo._id.toString() },
+                        })} />,
+                      <Ant.Popconfirm
+                        key="delete"
+                        title="Are you sure you want to delete this Todo?"
+                        onConfirm={() => {
+                          todosCollection.deleteOne(todo._id).then(() => {
+                            router.go(Routes.TODO_LIST_Drag_Drop);
+                            Ant.notification.success({
+                              message: "Success",
+                              description: "You have deleted the Todo",
+                            });
+                          });
+                        }}
+                      >
+                        <DeleteOutlined style={{ color: "#eb2f96" }} />
+                      </Ant.Popconfirm>
+                    ]}
+                      style={{ borderTopColor: "#53A753", width: "100%" }}
+                      size="small" key={todo.titel}
+                      onDragStart={(e) => e.dataTransfer.setData("id", todo.titel)}
+                      draggable
+                      bordered={true}>
                       {todo.titel}
                     </Ant.Card>
                   </Ant.List.Item>
