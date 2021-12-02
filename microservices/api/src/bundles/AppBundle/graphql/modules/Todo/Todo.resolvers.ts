@@ -18,7 +18,7 @@ export default {
             args.query = {
               filters: { userId: ctx.userId }
             }
-          return args
+          return args.query
         })],
       TodoCount: [X.ToCollectionCount(TodoCollection)],
     },
