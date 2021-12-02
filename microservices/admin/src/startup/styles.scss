@@ -1,3 +1,23 @@
 @import "~antd/dist/antd.min.css";
+@import '~antd/dist/antd.dark.css';
 @import "~@bluelibs/x-ui-admin/styles/main.css";
 @import "../bundles/UIAppBundle/styles/styles.scss";
+
+.ant-layout-sider-children{
+
+    background-color: #141414;
+}
+
+.ant-layout-header {
+    background-color: #141414 !important;
+
+}
+
+.ant-layout-content {
+    background-color: #000000 !important;
+
+}
+.ant-layout-sider-trigger {
+    background-color: #141414 !important;
+
+}
