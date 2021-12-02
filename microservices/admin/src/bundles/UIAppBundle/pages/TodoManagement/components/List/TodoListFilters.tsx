@@ -18,7 +18,7 @@ export function TodoListFiltersBase(props: TodoListFiltersProps) {
   const [form] = Ant.Form.useForm();
   const t = useTranslate();
 
-  const debouncedFilterUpdates = React.useMemo(() => {
+  const debouncedFilterUpdates = React.useMemo(() => {  
     const setFilters = (_, filters) => {
       props.onUpdate(filters);
     };

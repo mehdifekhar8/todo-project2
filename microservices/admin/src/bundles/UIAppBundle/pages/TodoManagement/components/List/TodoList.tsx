@@ -26,6 +26,7 @@ export function TodoList() {
       api.setFlexibleFilters(filters);
     };
   }, []);
+  
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
@@ -65,8 +66,7 @@ export function TodoList() {
               onKeyUp={(e) => {
                 const value = (e.target as HTMLInputElement).value;
                 api.setFilters({
-                  // Customise your search filters!
-                  title: new RegExp(`${value}`, "i"),
+                  titel: new RegExp(`${value}`, "i"),
                 });
               }}
             />

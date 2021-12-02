@@ -11,6 +11,7 @@ import * as Ant from "antd";
 import { Routes } from "@bundles/UIAppBundle";
 import { features } from "../../config/features";
 import { UsersListFilters } from "./UsersListFilters";
+import { TodoListFilters } from "@bundles/UIAppBundle/pages/TodoManagement/components/List/TodoListFilters";
 
 export function UsersList() {
   const UIComponents = useUIComponents();
@@ -94,6 +95,8 @@ export function UsersList() {
       <Ant.Layout.Content>
         <Provider>
           <div className="page-users-list">
+          {filtersOpened && <UsersListFilters onUpdate={onFiltersUpdate} />}
+
             <Ant.Input.Search
               name="Search"
               placeholder={t("generics.list_search")}
@@ -101,8 +104,7 @@ export function UsersList() {
               onKeyUp={(e) => {
                 const value = (e.target as HTMLInputElement).value;
                 api.setFilters({
-                  // Customise your search filters!
-                  title: new RegExp(`${value}`, "i"),
+                  "profile.firstName": new RegExp(`${value}`, "i"),
                 });
               }}
             />
