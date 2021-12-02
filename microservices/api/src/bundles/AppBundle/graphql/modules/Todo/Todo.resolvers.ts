@@ -2,6 +2,7 @@ import * as X from "@bluelibs/x-bundle";
 import { IResolverMap } from "@bluelibs/graphql-bundle";
 import { TodoInsertInput, TodoUpdateInput } from "../../../services/inputs";
 import { TodoCollection } from "../../../collections/Todo/Todo.collection";
+import { ObjectId } from "@bluelibs/ejson";
 
 
 export default {
@@ -11,13 +12,10 @@ export default {
       TodoFindOne: [X.ToNovaOne(TodoCollection)],
       TodoFind: [
         X.ToNova(TodoCollection, async (_, args, ctx, info) => {
-        return {
-          filters: {
-            userId: ctx.userId
-          },
-          options: {},
-        };
-      })], TodoCount: [X.ToCollectionCount(TodoCollection)],
+          args.query.filters.userId = ctx.userId
+          return args.query
+        })],
+         TodoCount: [X.ToCollectionCount(TodoCollection)],
     },
   ],
   Mutation: [
