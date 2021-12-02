@@ -47,9 +47,9 @@ export class TodoListFiltersForm extends XForm {
       },
 
       {
-        id: "UserId",
+        id: "userId",
         label: t("management.todo.fields.User"),
-        name: ["UserId"],
+        name: ["userId"],
         render: (props) => (
           <Ant.Form.Item {...props}>
             <UIComponents.RemoteSelect

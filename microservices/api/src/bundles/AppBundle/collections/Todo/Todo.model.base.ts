@@ -7,7 +7,7 @@ export class Todo {
   User: User;
 
   @Is(an.objectId().required())
-  UserId: any;
+  userId: any;
 
   @Is(an.objectId())
   _id?: any;

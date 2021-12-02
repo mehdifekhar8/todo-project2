@@ -6,7 +6,7 @@
           "_id": "ID",
           "titel": "Titel",
           "done": "Done",
-          "UserId": "User Id",
+          "userId": "User Id",
           "User": "User"
         },
         "menu": {

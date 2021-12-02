@@ -6,5 +6,5 @@ import { IBundleLinkCollectionOption } from "@bluelibs/mongo-bundle";
 
 export const User: IBundleLinkCollectionOption = {
   collection: () => UsersCollection,
-  field: "UserId",
+  field: "userId",
 };

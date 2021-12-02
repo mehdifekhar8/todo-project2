@@ -5,7 +5,7 @@ import { TodoListFiltersForm as BaseTodoListFiltersForm } from "./TodoListFilter
 export class TodoListFiltersForm extends BaseTodoListFiltersForm {
   build() {
     super.build();
-    this.remove("UserId")
+    this.remove("userId")
 
     // Perform additional modifications such as updating rendering functions, labels, description
   }

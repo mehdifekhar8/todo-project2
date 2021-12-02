@@ -1,7 +1,7 @@
 export default /* GraphQL */ `
   type Todo {
     User: User
-    UserId: ObjectId
+    userId: ObjectId
     _id: ObjectId
     done: Boolean!
     titel: String!

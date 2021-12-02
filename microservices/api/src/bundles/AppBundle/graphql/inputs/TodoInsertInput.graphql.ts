@@ -1,6 +1,6 @@
 export default /* GraphQL */ `
   input TodoInsertInput {
-    UserId: ObjectId
+    userId: ObjectId
     done: Boolean!
     titel: String!
   }

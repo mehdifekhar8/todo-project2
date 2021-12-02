@@ -81,7 +81,7 @@ export class TodoViewer extends XViewer {
         _id: 1,
         fullName: 1,
       },
-      UserId: 1,
+      userId: 1,
     };
   }
 }

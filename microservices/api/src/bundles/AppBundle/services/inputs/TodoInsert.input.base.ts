@@ -4,7 +4,7 @@ import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 @Schema()
 export class TodoInsertInput {
   @Is(an.objectId().required())
-  UserId: any;
+  userId: any;
 
   @Is(a.boolean().required())
   done: boolean;

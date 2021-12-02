@@ -49,9 +49,9 @@ export class TodoEditForm extends XForm {
       },
 
       {
-        id: "UserId",
+        id: "userId",
         label: t("management.todo.fields.User"),
-        name: ["UserId"],
+        name: ["userId"],
         required: true,
         render: (props) => (
           <Ant.Form.Item {...props}>
@@ -74,7 +74,7 @@ export class TodoEditForm extends XForm {
         _id: 1,
         fullName: 1,
       },
-      UserId: 1,
+      userId: 1,
     };
   }
 

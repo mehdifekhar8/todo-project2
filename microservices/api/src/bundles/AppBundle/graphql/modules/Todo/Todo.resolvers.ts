@@ -9,10 +9,11 @@ export default {
     [],
     {
       TodoFindOne: [X.ToNovaOne(TodoCollection)],
-      TodoFind: [X.ToNova(TodoCollection, async (_, args, ctx, info) => {
+      TodoFind: [
+        X.ToNova(TodoCollection, async (_, args, ctx, info) => {
         return {
           filters: {
-            UserId: ctx.userId
+            userId: ctx.userId
           },
           options: {},
         };
@@ -23,23 +24,21 @@ export default {
     [],
     {
       TodoInsertOne: [
-        X.CheckPermission("ADMIN"),
         X.ToModel(TodoUpdateInput, { field: "document" }),
         X.ToDocumentInsert(TodoCollection, "document", async (document, ctx) => {
-          document.UserId = ctx.userId
+          document.userId = ctx.userId
           X.Validate({ field: "document" });
         }),
         X.ToNovaByResultID(TodoCollection),
       ],
       TodoUpdateOne: [
-        X.CheckPermission("ADMIN"),
         X.ToModel(TodoUpdateInput, { field: "document" }),
         X.CheckDocumentExists(TodoCollection),
-        X.Secure.IsUser(TodoCollection, "UserId", "_id"),
+        X.Secure.IsUser(TodoCollection, "userId", "_id"),
         async (_, args, ctx) => {
           const { container } = ctx;
           const collection = container.get(TodoCollection);
-          args.document.UserId = ctx.userId;
+          args.document.userId = ctx.userId;
           return await collection.updateOne(
             { _id: args._id },
             {
@@ -48,7 +47,7 @@ export default {
         },
       ],
       TodoDeleteOne: [
-        X.Secure.IsUser(TodoCollection, "UserId", "_id"),
+        X.Secure.IsUser(TodoCollection, "userId", "_id"),
         X.CheckDocumentExists(TodoCollection),
         X.ToDocumentDeleteByID(TodoCollection),
       ],

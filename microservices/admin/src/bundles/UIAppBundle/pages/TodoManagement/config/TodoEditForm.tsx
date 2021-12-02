@@ -7,7 +7,7 @@ import { Todo } from "@bundles/UIAppBundle/collections";
 export class TodoEditForm extends BaseTodoEditForm {
   build() {
     super.build();
-    this.remove("UserId")
+    this.remove("userId")
 
     // Perform additional modifications such as updating rendering functions, labels, description
   }

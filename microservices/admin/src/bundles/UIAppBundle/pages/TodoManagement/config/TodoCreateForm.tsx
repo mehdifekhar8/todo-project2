@@ -5,7 +5,7 @@ import { TodoCreateForm as BaseTodoCreateForm } from "./TodoCreateForm.base";
 export class TodoCreateForm extends BaseTodoCreateForm {
   build() {
     super.build();
-    this.remove("UserId")
+    this.remove("userId")
 
     // Perform additional modifications such as updating rendering functions, labels, description
   }

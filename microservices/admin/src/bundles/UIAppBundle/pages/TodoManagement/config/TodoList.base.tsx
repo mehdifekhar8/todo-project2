@@ -87,7 +87,7 @@ export class TodoList extends XList<Todo> {
         _id: 1,
         fullName: 1,
       },
-      UserId: 1,
+      userId: 1,
     };
   }
 }

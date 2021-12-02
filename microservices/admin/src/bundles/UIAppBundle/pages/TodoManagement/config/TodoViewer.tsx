@@ -7,7 +7,7 @@ import { TodoViewer as BaseTodoViewer } from "./TodoViewer.base";
 export class TodoViewer extends BaseTodoViewer {
   build() {
     super.build();
-    this.remove("UserId")
+    this.remove("userId")
 
     // Perform additional modifications such as updating rendering functions, labels, description
   }

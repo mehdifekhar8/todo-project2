@@ -4,7 +4,7 @@ import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 @Schema()
 export class TodoUpdateInput {
   @Is(an.objectId().nullable())
-  UserId?: any;
+  userId?: any;
 
   @Is(a.boolean().nullable())
   done?: boolean;
