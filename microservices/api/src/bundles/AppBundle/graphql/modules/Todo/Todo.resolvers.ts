@@ -12,10 +12,15 @@ export default {
       TodoFindOne: [X.ToNovaOne(TodoCollection)],
       TodoFind: [
         X.ToNova(TodoCollection, async (_, args, ctx, info) => {
-          args.query.filters.userId = ctx.userId
+          (args.query.filters) ?
+            args.query.filters.userId = ctx.userId
+            :
+            args.query = {
+              filters: { userId: ctx.userId }
+            }
           return args.query
         })],
-         TodoCount: [X.ToCollectionCount(TodoCollection)],
+      TodoCount: [X.ToCollectionCount(TodoCollection)],
     },
   ],
   Mutation: [
