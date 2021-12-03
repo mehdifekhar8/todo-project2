@@ -1,12 +1,13 @@
 import {
   use, useRouter, useTranslate, useUIComponents,
 } from "@bluelibs/x-ui";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import * as Ant from "antd";
 import { Todo, TodoCollection } from "@bundles/UIAppBundle/collections";
 import { PlusOutlined, FilterOutlined, SettingOutlined, EditOutlined, EllipsisOutlined, DeleteOutlined, FolderViewOutlined } from "@ant-design/icons";
 import { features } from "../../config/features";
 import { Routes } from "@bundles/UIAppBundle";
+import * as debounce from "lodash.debounce";
 
 export function DragDropTodoList() {
   const UIComponents = useUIComponents();
@@ -14,16 +15,21 @@ export function DragDropTodoList() {
   const t = useTranslate();
   const todosCollection = use(TodoCollection);
   const [todos, setTodos] = useState<Todo[]>([])
+  const [filter, setFilter] = useState(new RegExp(``, "i"))
 
-  useEffect(() => {
-    todosCollection.find({}, {
+  useMemo(() => {
+    todosCollection.find({
+      filters: {
+       titel : filter
+      },
+    }, {
       _id: 1,
       done: 1,
       titel: 1,
     }).then((result) => {
       setTodos(result);
     });
-  }, [])
+  }, [filter])
 
   const onDragOver = (ev: React.DragEvent<HTMLDivElement>) => {
     ev.preventDefault();
@@ -39,6 +45,15 @@ export function DragDropTodoList() {
       return todo;
     });
     setTodos(updatedTodo);
+  }
+  const onDropSort = (ev: React.DragEvent<HTMLDivElement>, todo: Todo) => {
+    const id = ev.dataTransfer.getData("id");
+    const todo_id = todo.titel
+    console.log("the firest id ")
+    console.log(id)
+    console.log("the second id ")
+    console.log(todo_id)
+
   }
 
   function checkTodoDone(todo: Todo) {
@@ -67,6 +82,17 @@ export function DragDropTodoList() {
           ) : null,
         ]}
       />
+      <Ant.Input.Search
+        name="Search"
+        placeholder="search by title"
+        className="search"
+        onKeyUp={(e) => {
+          const value = (e.target as HTMLInputElement).value;
+           setFilter(
+             new RegExp(`${value}`, "i"),
+          )
+        }}
+      />
       <div className="page-todo-lists"   >
         <Ant.Row>
           <Ant.Col span={12} >
@@ -79,7 +105,8 @@ export function DragDropTodoList() {
                 bordered
                 dataSource={todos ? todos.filter(checkTodoNotDone) : null}
                 renderItem={todo => (
-                  <Ant.List.Item   >
+                  <Ant.List.Item    onDragOver={(e) => onDragOver(e)}
+                  onDrop={(e) => { onDropSort(e, todo) }}   >
                     <Ant.Typography.Text mark></Ant.Typography.Text>
                     <Ant.Card actions={[
                       <FolderViewOutlined
