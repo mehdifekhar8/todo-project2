@@ -16,7 +16,6 @@
       "list_search": "Search",
       "list_actions": "Actions",
       "live_data_view": "Live Data",
-      "Dashboard": "Dashboard",
       "or": "Or",
       "forms": {
         "field_required": "%{field} is required."

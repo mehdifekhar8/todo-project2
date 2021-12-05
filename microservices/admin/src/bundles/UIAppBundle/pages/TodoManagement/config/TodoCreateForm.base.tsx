@@ -51,8 +51,16 @@ export class TodoCreateForm extends XForm {
       },
 
       {
+        id: "index",
+        label: t("management.todo.fields.index"),
+        name: ["index"],
+        required: true,
+        component: Ant.InputNumber,
+      },
+
+      {
         id: "userId",
-        label: t("management.todo.fields.User"),
+        label: t("management.todo.fields.user"),
         name: ["userId"],
         required: true,
         render: (props) => (

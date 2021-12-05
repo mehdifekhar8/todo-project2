@@ -50,9 +50,21 @@ export class TodoViewer extends XViewer {
         },
       },
       {
-        id: "User",
-        label: t("management.todo.fields.User"),
-        dataIndex: ["User"],
+        id: "index",
+        label: t("management.todo.fields.index"),
+        dataIndex: ["index"],
+        render: (value) => {
+          const props = {
+            type: "number",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "user",
+        label: t("management.todo.fields.user"),
+        dataIndex: ["user"],
         render: (value) => {
           const props = {
             type: "relation",
@@ -77,7 +89,8 @@ export class TodoViewer extends XViewer {
       _id: 1,
       titel: 1,
       done: 1,
-      User: {
+      index: 1,
+      user: {
         _id: 1,
         fullName: 1,
       },

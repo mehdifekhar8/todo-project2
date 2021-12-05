@@ -48,10 +48,24 @@ export class TodoList extends XList<Todo> {
         },
       },
       {
-        id: "User",
-        title: t("management.todo.fields.User"),
-        key: "management.todo.fields.User",
-        dataIndex: ["User"],
+        id: "index",
+        title: t("management.todo.fields.index"),
+        key: "management.todo.fields.index",
+        dataIndex: ["index"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "number",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "user",
+        title: t("management.todo.fields.user"),
+        key: "management.todo.fields.user",
+        dataIndex: ["user"],
         sorter: true,
         render: (value, model) => {
           const props = {
@@ -74,7 +88,7 @@ export class TodoList extends XList<Todo> {
 
   static getSortMap() {
     return {
-      User: "User.fullName",
+      user: "user.fullName",
     };
   }
 
@@ -83,7 +97,8 @@ export class TodoList extends XList<Todo> {
       _id: 1,
       titel: 1,
       done: 1,
-      User: {
+      index: 1,
+      user: {
         _id: 1,
         fullName: 1,
       },

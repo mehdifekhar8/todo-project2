@@ -6,6 +6,7 @@ export class TodoCreateForm extends BaseTodoCreateForm {
   build() {
     super.build();
     this.remove("userId")
+    this.remove("index")
 
     // Perform additional modifications such as updating rendering functions, labels, description
   }

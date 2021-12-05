@@ -20,25 +20,35 @@ export function DragDropTodoList() {
   useMemo(() => {
     todosCollection.find({
       filters: {
-       titel : filter
+        titel: filter
       },
+      options: {
+        sort: {
+          index: 1,
+        },
+      }
     }, {
       _id: 1,
       done: 1,
       titel: 1,
+      index: 1
     }).then((result) => {
       setTodos(result);
     });
   }, [filter])
 
+  const onDragOversort = (ev: React.DragEvent<HTMLDivElement>) => {
+    ev.preventDefault();
+  }
   const onDragOver = (ev: React.DragEvent<HTMLDivElement>) => {
     ev.preventDefault();
   }
 
   const onDrop = (ev: React.DragEvent<HTMLDivElement>, done: boolean) => {
+    console.log("ondrop");
     const id = ev.dataTransfer.getData("id");
     const updatedTodo = todos.filter((todo) => {
-      if (todo.titel == id) {
+      if (todo._id == id) {
         todo.done = done;
         todosCollection.updateOne(todo._id, { $set: { done: done } })
       }
@@ -46,14 +56,16 @@ export function DragDropTodoList() {
     });
     setTodos(updatedTodo);
   }
-  const onDropSort = (ev: React.DragEvent<HTMLDivElement>, todo: Todo) => {
-    const id = ev.dataTransfer.getData("id");
-    const todo_id = todo.titel
-    console.log("the firest id ")
-    console.log(id)
-    console.log("the second id ")
-    console.log(todo_id)
-
+  const onDropSort = (ev: React.DragEvent<HTMLDivElement>, toTodoElement: Todo) => {
+    const fromElementid = ev.dataTransfer.getData("id");
+    const updatedTodo = todos.filter(async (todo) => {
+      if (todo._id == fromElementid) {
+        await todosCollection.updateOne(todo._id, { $set: { index: toTodoElement.index } })
+        await todosCollection.updateOne(toTodoElement._id, { $set: { index: todo.index } })
+      }
+      setFilter(new RegExp(``, "i"))
+      return todo;
+    });
   }
 
   function checkTodoDone(todo: Todo) {
@@ -65,7 +77,7 @@ export function DragDropTodoList() {
     if (!todo.done)
       return true;
   }
-
+  console.log("render")
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
@@ -88,25 +100,30 @@ export function DragDropTodoList() {
         className="search"
         onKeyUp={(e) => {
           const value = (e.target as HTMLInputElement).value;
-           setFilter(
-             new RegExp(`${value}`, "i"),
+          setFilter(
+            new RegExp(`${value}`, "i"),
           )
         }}
       />
       <div className="page-todo-lists"   >
+        <Ant.Divider orientation="left" plain>
+          <h4 style={{ color: "#124BD1" }} >Note : </h4>
+        </Ant.Divider>
+        <h5> to change task from todo to done and change  order at the same time just drag it above the task card </h5>
+        <h5> to change task from todo to done without changin the order drag it next to the blue Todo or blue done card title  </h5>
         <Ant.Row>
           <Ant.Col span={12} >
             <div className="page-todo-lists"
               onDragOver={(e) => onDragOver(e)}
               onDrop={(e) => { onDrop(e, false) }}>
               <Ant.List className="page-todo-lists"
-                header={<div className="page-todo-lists" >Todo</div>}
+                header={<div className="page-todo-lists"   ><h5 style={{ color: "#124BD1" }} >Todo </h5> </div>}
                 footer={<div className="page-todo-lists" >Todo Lists</div>}
                 bordered
                 dataSource={todos ? todos.filter(checkTodoNotDone) : null}
                 renderItem={todo => (
-                  <Ant.List.Item    onDragOver={(e) => onDragOver(e)}
-                  onDrop={(e) => { onDropSort(e, todo) }}   >
+                  <Ant.List.Item onDragOver={(e) => onDragOversort(e)}
+                    onDrop={(e) => { onDropSort(e, todo) }}   >
                     <Ant.Typography.Text mark></Ant.Typography.Text>
                     <Ant.Card actions={[
                       <FolderViewOutlined
@@ -141,10 +158,10 @@ export function DragDropTodoList() {
                     }}
                       size="small"
                       key={todo.titel}
-                      onDragStart={(e) => e.dataTransfer.setData("id", todo.titel)}
+                      onDragStart={(e) => e.dataTransfer.setData("id", todo._id)}
                       draggable
                       bordered={true}>
-                      {todo.titel}
+                      {todo.titel} | index : {todo.index}
                     </Ant.Card>
                   </Ant.List.Item>
                 )}
@@ -153,15 +170,18 @@ export function DragDropTodoList() {
           </Ant.Col>
           <Ant.Col span={12}>
             <div className="page-todo-lists"
+              onDragOver={(ev) => onDragOver(ev)}
               onDrop={(e) => onDrop(e, true)}
-              onDragOver={(ev) => onDragOver(ev)}>
+            >
               <Ant.List
-                header={<div className="page-todo-lists">Done</div>}
+                header={<div className="page-todo-lists"  > <h5 style={{ color: "#124BD1" }} >Done </h5>
+                </div>}
                 footer={<div className="page-todo-lists" >done Lists</div>}
                 bordered
                 dataSource={todos ? todos.filter(checkTodoDone) : null}
                 renderItem={todo => (
-                  <Ant.List.Item>
+                  <Ant.List.Item onDragOver={(e) => onDragOversort(e)}
+                    onDrop={(e) => { onDropSort(e, todo) }}  >
                     <Ant.Typography.Text mark></Ant.Typography.Text>
                     <Ant.Card actions={[
                       <FolderViewOutlined style={{ color: "#124BD1" }}
@@ -192,10 +212,10 @@ export function DragDropTodoList() {
                     ]}
                       style={{ borderTopColor: "#53A753", width: "100%" }}
                       size="small" key={todo.titel}
-                      onDragStart={(e) => e.dataTransfer.setData("id", todo.titel)}
+                      onDragStart={(e) => e.dataTransfer.setData("id", todo._id)}
                       draggable
                       bordered={true}>
-                      {todo.titel}
+                      {todo.titel}  | index: {todo.index}
                     </Ant.Card>
                   </Ant.List.Item>
                 )}

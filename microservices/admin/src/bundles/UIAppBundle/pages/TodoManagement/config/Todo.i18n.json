@@ -6,8 +6,9 @@
           "_id": "ID",
           "titel": "Titel",
           "done": "Done",
+          "index": "Index",
           "userId": "User Id",
-          "User": "User"
+          "user": "User"
         },
         "menu": {
           "title": "Todo"

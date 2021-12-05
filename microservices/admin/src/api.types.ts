@@ -377,23 +377,26 @@ export enum SubscriptionEventType {
 
 export type Todo = {
   __typename?: 'Todo';
-  User?: Maybe<User>;
-  userId?: Maybe<Scalars['ObjectId']>;
   _id?: Maybe<Scalars['ObjectId']>;
   done: Scalars['Boolean'];
+  index?: Maybe<Scalars['Int']>;
   titel: Scalars['String'];
+  user?: Maybe<User>;
+  userId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type TodoInsertInput = {
-  userId?: Maybe<Scalars['ObjectId']>;
   done: Scalars['Boolean'];
+  index?: Maybe<Scalars['Int']>;
   titel: Scalars['String'];
+  userId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type TodoUpdateInput = {
-  userId?: Maybe<Scalars['ObjectId']>;
   done?: Maybe<Scalars['Boolean']>;
+  index?: Maybe<Scalars['Int']>;
   titel?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['ObjectId']>;
 };
 
 
@@ -406,7 +409,7 @@ export type User = {
   createdBy?: Maybe<User>;
   /** Represents the user's id who has created this object */
   createdById?: Maybe<Scalars['ObjectId']>;
-  email?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   fullName: Scalars['String'];
   isEnabled: Scalars['Boolean'];
   profile: UserProfile;

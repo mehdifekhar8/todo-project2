@@ -18,13 +18,15 @@ export const Todo = collection({
   },
   fields: [
     field.string("titel"),
-    field.boolean("done")
+    field.boolean("done"),
+    field.integer("index")
+
   ],
   relations: [
 
     relation({
 
-      id: "User",
+      id: "user",
       to: "Users",
     }),
 

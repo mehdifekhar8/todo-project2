@@ -81,7 +81,7 @@ export class AppFixture {
 
   // Runs if all data maps are empty or we're in a test environment
   async shouldRun() {
-  return true ; 
+// return true ; 
     if (this.kernel.isTesting()) return false;
 
     for (const collectionName in dataMap) {

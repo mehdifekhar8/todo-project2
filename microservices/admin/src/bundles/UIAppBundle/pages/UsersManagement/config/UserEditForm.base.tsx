@@ -33,7 +33,7 @@ export class UserEditForm extends XForm {
                 Admin
               </Ant.Select.Option>
               <Ant.Select.Option value="USER" key="USER">
-                USER
+                User
               </Ant.Select.Option>
             </Ant.Select>
           </Ant.Form.Item>

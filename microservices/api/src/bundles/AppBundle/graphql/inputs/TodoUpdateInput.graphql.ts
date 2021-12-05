@@ -1,7 +1,8 @@
 export default /* GraphQL */ `
   input TodoUpdateInput {
-    userId: ObjectId
     done: Boolean
+    index: Int
     titel: String
+    userId: ObjectId
   }
 `;

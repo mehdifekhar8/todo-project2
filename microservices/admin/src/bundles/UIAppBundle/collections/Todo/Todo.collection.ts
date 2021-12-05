@@ -26,7 +26,7 @@ export class TodoCollection extends Collection<Todo> {
     return [
       {
         collection: () => UsersCollection,
-        name: "User",
+        name: "user",
         field: "userId",
       },
     ];

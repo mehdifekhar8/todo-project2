@@ -1,9 +1,10 @@
 export default /* GraphQL */ `
   type Todo {
-    User: User
-    userId: ObjectId
     _id: ObjectId
     done: Boolean!
+    index: Int
     titel: String!
+    user: User
+    userId: ObjectId
   }
 `;
